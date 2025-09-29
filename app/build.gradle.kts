@@ -61,6 +61,10 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    // Material
+    // https://mvnrepository.com/artifact/com.google.android.material/material
+    implementation("com.google.android.material:material:1.13.0")
+
     // https://mvnrepository.com/artifact/androidx.core/core-splashscreen
     implementation("androidx.core:core-splashscreen:1.0.1")
 
