@@ -1,45 +1,40 @@
 package com.example.kotlin_nz.presentation.common
 
-import android.content.res.Configuration
-import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.kotlin_nz.R
 import com.example.kotlin_nz.presentation.Dimens
 
 @Composable
-fun NewsButton(
+fun NewsTextButton(
     text: String,
     onClick: () -> Unit,
 ) {
+
     Box(
         modifier = Modifier
             .border(
                 width = 1.dp,
-                color = MaterialTheme.colorScheme.primary,
+                color = MaterialTheme.colorScheme.background,
                 shape = RoundedCornerShape(Dimens.buttonRoundedCornerRadius)
             )
             .clip(RoundedCornerShape(Dimens.buttonRoundedCornerRadius))
-            .background(color = MaterialTheme.colorScheme.primary)
+            .background(color = MaterialTheme.colorScheme.background)
             .padding(
                 vertical = Dimens.buttonVerticalPadding,
                 horizontal = Dimens.buttonHorizontalPadding
@@ -50,19 +45,9 @@ fun NewsButton(
             text = text,
             style = MaterialTheme.typography.labelMedium.copy(
                 fontWeight = FontWeight.SemiBold,
-                color = Color.White,
+                color = colorResource(R.color.text_medium),
             )
         )
     }
 
-}
-
-@Preview(showBackground = true)
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Composable
-fun NewsButtonPreview() {
-    NewsButton(
-        text = "Get Started",
-        onClick = {}
-    )
 }
