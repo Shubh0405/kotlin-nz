@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,6 +21,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
 import com.example.kotlin_nz.domain.usecases.AppEntryUseCases
+import com.example.kotlin_nz.presentation.nvgraph.NavGraph
 import com.example.kotlin_nz.presentation.onboarding.screens.OnboardingScreen
 import com.example.kotlin_nz.presentation.onboarding.viewmodel.OnboardingViewModel
 import com.example.kotlin_nz.ui.theme.KotlinnzTheme
@@ -34,8 +36,12 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var appEntryUseCases: AppEntryUseCases
 
+    val mainViewModel by viewModels<MainActivityViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        installSplashScreen()
+        installSplashScreen().setKeepOnScreenCondition(
+            condition = { mainViewModel.splashScreenCondition }
+        )
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
@@ -52,8 +58,8 @@ class MainActivity : ComponentActivity() {
                         .fillMaxSize()
                         .background(color = MaterialTheme.colorScheme.background)
                 ) {
-                    val onboardingViewModel: OnboardingViewModel = hiltViewModel()
-                    OnboardingScreen(event = onboardingViewModel::onEvent)
+                    val startingDestination: String = mainViewModel.startingDestination
+                    NavGraph(startDestination = startingDestination)
                 }
             }
         }

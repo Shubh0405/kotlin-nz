@@ -41,7 +41,7 @@ fun OnboardingScreen(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = Dimens.MediumPadding2)
+                .padding(Dimens.MediumPadding2)
                 .navigationBarsPadding(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
