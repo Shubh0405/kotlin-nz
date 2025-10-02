@@ -1,6 +1,7 @@
 package com.example.kotlin_nz
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -15,14 +16,35 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.lifecycleScope
+import com.example.kotlin_nz.domain.usecases.AppEntryUseCases
 import com.example.kotlin_nz.presentation.onboarding.screens.OnboardingScreen
+import com.example.kotlin_nz.presentation.onboarding.viewmodel.OnboardingViewModel
 import com.example.kotlin_nz.ui.theme.KotlinnzTheme
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    @Inject
+    lateinit var appEntryUseCases: AppEntryUseCases
+
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        lifecycleScope.launch {
+            appEntryUseCases.readAppEntry().collectLatest {
+                Log.d("TEST", it.toString())
+            }
+        }
+
         setContent {
             KotlinnzTheme {
                 Box(
@@ -30,7 +52,8 @@ class MainActivity : ComponentActivity() {
                         .fillMaxSize()
                         .background(color = MaterialTheme.colorScheme.background)
                 ) {
-                    OnboardingScreen()
+                    val onboardingViewModel: OnboardingViewModel = hiltViewModel()
+                    OnboardingScreen(event = onboardingViewModel::onEvent)
                 }
             }
         }

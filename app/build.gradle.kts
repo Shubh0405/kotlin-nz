@@ -5,6 +5,7 @@ plugins {
     // Kotlin serialization plugin for type safe routes and navigation arguments
     kotlin("plugin.serialization") version "2.0.21"
     id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
     id("com.google.devtools.ksp")
 }
 
@@ -80,7 +81,10 @@ dependencies {
     // Hilt for dependency injection
     // https://mvnrepository.com/artifact/com.google.dagger/hilt-android
     implementation("com.google.dagger:hilt-android:2.57.2")
+    // https://mvnrepository.com/artifact/androidx.hilt/hilt-navigation-compose
+    implementation("androidx.hilt:hilt-navigation-compose:1.3.0")
     kapt("com.google.dagger:hilt-compiler:2.57.2")
+
 
 
     // Retrofit for network calls

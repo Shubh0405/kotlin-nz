@@ -21,11 +21,14 @@ import com.example.kotlin_nz.presentation.common.NewsButton
 import com.example.kotlin_nz.presentation.common.NewsTextButton
 import com.example.kotlin_nz.presentation.onboarding.components.OnboardingPage
 import com.example.kotlin_nz.presentation.onboarding.components.PageIndicator
+import com.example.kotlin_nz.presentation.onboarding.viewmodel.OnboardingEvent
 import com.example.kotlin_nz.presentation.pages
 import kotlinx.coroutines.launch
 
 @Composable
-fun OnboardingScreen() {
+fun OnboardingScreen(
+    event: (OnboardingEvent) -> Unit
+) {
     Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.SpaceBetween) {
 
         val pagerState = rememberPagerState(initialPage = 0) {
@@ -58,7 +61,7 @@ fun OnboardingScreen() {
                 }
                 NewsButton(text = if (pagerState.currentPage == pages.size - 1) "Get Started" else "Next") {
                     if (pagerState.currentPage == pages.size - 1) {
-
+                        event(OnboardingEvent.saveAppEntry)
                     } else {
                         scope.launch {
                             pagerState.animateScrollToPage(page = pagerState.currentPage + 1)
