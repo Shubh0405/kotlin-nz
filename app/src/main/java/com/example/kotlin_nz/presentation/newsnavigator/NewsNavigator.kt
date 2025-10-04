@@ -6,14 +6,17 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.kotlin_nz.R
 import com.example.kotlin_nz.domain.models.Article
@@ -29,6 +32,7 @@ fun NewsNavigator(
 ) {
 
     val navController = rememberNavController()
+    val backStackState = navController.currentBackStackEntryAsState().value
 
     var selectedTab by rememberSaveable {
         mutableIntStateOf(0)
@@ -53,16 +57,31 @@ fun NewsNavigator(
         )
     )
 
+    var showBottomBar by rememberSaveable {
+        mutableStateOf(
+            true
+        )
+    }
+
+    LaunchedEffect(backStackState) {
+        when (backStackState?.destination?.route) {
+            Routes.HomeScreen.route -> showBottomBar = true
+            Routes.BookmarksScreen.route -> showBottomBar = true
+            else -> showBottomBar = false
+        }
+    }
+
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
             .safeDrawingPadding()
             .navigationBarsPadding(),
         bottomBar = {
-            NewsBottomBar(
-                itemList = bottomBarItems,
-                selectedItem = selectedTab
-            )
+            if (showBottomBar)
+                NewsBottomBar(
+                    itemList = bottomBarItems,
+                    selectedItem = selectedTab
+                )
         }
     ) { paddingValues ->
         val modifier = Modifier.padding(paddingValues)
@@ -79,7 +98,9 @@ fun NewsNavigator(
             composable(
                 route = Routes.BookmarksScreen.route
             ) {
-                BookmarkScreen()
+                BookmarkScreen {
+                    article -> navigateToDetailsScreen(navController, article)
+                }
             }
 
             composable(
