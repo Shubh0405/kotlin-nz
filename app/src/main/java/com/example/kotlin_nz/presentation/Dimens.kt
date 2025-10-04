@@ -6,8 +6,10 @@ import androidx.compose.ui.unit.dp
 object Dimens {
     val MediumPadding1: Dp = 24.dp
     val MediumPadding2: Dp = 30.dp
+    val MediumPadding3: Dp = 16.dp
     val SmallPadding1: Dp = 8.dp
     val SmallPadding2: Dp = 12.dp
+    val SmallPadding3: Dp = 4.dp
     val IndicatorShape: Dp = 14.dp
 
     val buttonVerticalPadding: Dp = 12.dp
@@ -15,4 +17,6 @@ object Dimens {
     val buttonRoundedCornerRadius: Dp = 6.dp
 
     val articleCardSize: Dp = 96.dp
+
+    val bottomBarIconSize: Dp = 20.dp
 }

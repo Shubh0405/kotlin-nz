@@ -14,6 +14,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import com.example.kotlin_nz.presentation.home.screens.HomeScreen
+import com.example.kotlin_nz.presentation.newsnavigator.NewsNavigator
 import com.example.kotlin_nz.presentation.onboarding.screens.OnboardingScreen
 import com.example.kotlin_nz.presentation.onboarding.viewmodel.OnboardingViewModel
 
@@ -50,7 +51,7 @@ fun NavGraph(
                         .safeDrawingPadding()
                         .navigationBarsPadding()
                 ) {
-                    HomeScreen()
+                    NewsNavigator()
                 }
             }
         }
