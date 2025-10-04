@@ -13,4 +13,6 @@ object Dimens {
     val buttonVerticalPadding: Dp = 12.dp
     val buttonHorizontalPadding: Dp = 20.dp
     val buttonRoundedCornerRadius: Dp = 6.dp
+
+    val articleCardSize: Dp = 96.dp
 }

@@ -1,4 +1,4 @@
-package com.example.kotlin_nz.domain.usecases
+package com.example.kotlin_nz.domain.usecases.appentry
 
 import com.example.kotlin_nz.domain.manager.LocalUserManager
 import kotlinx.coroutines.flow.Flow

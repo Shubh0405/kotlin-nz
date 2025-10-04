@@ -95,7 +95,7 @@ dependencies {
 
     // Coil for image loading
     // https://mvnrepository.com/artifact/io.coil-kt.coil3/coil
-    implementation("io.coil-kt.coil3:coil:3.0.4")
+    implementation("io.coil-kt:coil-compose:2.4.0")
 
     // DataStore (Preferences)
     // https://mvnrepository.com/artifact/androidx.datastore/datastore-preferences

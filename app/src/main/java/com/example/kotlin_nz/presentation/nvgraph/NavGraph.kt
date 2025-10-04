@@ -13,6 +13,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
+import com.example.kotlin_nz.presentation.home.screens.HomeScreen
 import com.example.kotlin_nz.presentation.onboarding.screens.OnboardingScreen
 import com.example.kotlin_nz.presentation.onboarding.viewmodel.OnboardingViewModel
 
@@ -43,10 +44,13 @@ fun NavGraph(
             composable(
                 route = Routes.NewsNavigatorScreen.route
             ) {
-                Box (
-                    modifier = Modifier.fillMaxSize().safeDrawingPadding()
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .safeDrawingPadding()
+                        .navigationBarsPadding()
                 ) {
-                    Text("News Navigator Screen")
+                    HomeScreen()
                 }
             }
         }
